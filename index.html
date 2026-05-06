@@ -1,13 +1,705 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hy Maxpro – Chiến Lược Kinh Doanh 2024</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+  <style>
+    /* ── Design tokens ─────────────────────────── */
+    :root {
+      --primary:           #0041c8;
+      --primary-container: #0055ff;
+      --secondary:         #006d43;
+      --secondary-container: #75f8b3;
+      --tertiary:          #674b00;
+      --surface:           #fcf9f8;
+      --on-surface:        #1c1b1b;
+      --on-surface-var:    #434656;
+      --outline-var:       #c3c5d9;
+      --error:             #ba1a1a;
+      --font-sans: 'Noto Sans', sans-serif;
+      --font-serif: 'Noto Serif', serif;
+      --section-gap: 80px;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,.08);
+    }
 
+    /* ── Reset ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--surface);
+      color: var(--on-surface);
+      line-height: 1.6;
+    }
+    img { max-width: 100%; display: block; }
+    a  { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ── Animations ────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes progressFill {
+      from { width: 0; }
+      to   { width: var(--target-w); }
+    }
+    .animate-fadeup  { animation: fadeUp  .7s ease both; }
+    .animate-fadein  { animation: fadeIn  .6s ease both; }
+    .delay-1 { animation-delay: .1s; }
+    .delay-2 { animation-delay: .2s; }
+    .delay-3 { animation-delay: .3s; }
+    .delay-4 { animation-delay: .4s; }
+    .delay-5 { animation-delay: .5s; }
+
+    /* ── Container ─────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Buttons ───────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font-family: var(--font-sans); font-size: .95rem; font-weight: 600;
+      cursor: pointer; border: none; transition: all .25s;
+    }
+    .btn-primary   { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-container); box-shadow: 0 6px 20px rgba(0,65,200,.35); transform: translateY(-2px); }
+    .btn-outline   { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+
+    /* ── Section helpers ───────────────────────── */
+    section { padding: var(--section-gap) 0; }
+    .section-tag {
+      display: inline-block; background: #e8f0fe; color: var(--primary);
+      font-size: .78rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700; line-height: 1.25; margin-bottom: 16px;
+    }
+    .section-subtitle { color: var(--on-surface-var); max-width: 600px; }
+    .text-center { text-align: center; }
+    .text-center .section-subtitle { margin: 0 auto; }
+
+    /* ════════════════════════════════════════════
+       NAV
+    ═════════════════════════════════════════════ */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(252,249,248,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--outline-var);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      font-family: var(--font-serif); font-size: 1.35rem; font-weight: 700;
+      color: var(--primary); display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo span { color: var(--secondary); }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: .9rem; font-weight: 500; color: var(--on-surface-var); transition: color .2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { margin-left: 16px; }
+    .nav-hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--on-surface); border-radius: 2px; transition: all .3s;
+    }
+    .mobile-menu {
+      display: none; flex-direction: column; padding: 16px 24px 24px;
+      border-top: 1px solid var(--outline-var); gap: 12px;
+    }
+    .mobile-menu a {
+      font-size: 1rem; font-weight: 500; color: var(--on-surface-var);
+      padding: 8px 0; border-bottom: 1px solid var(--outline-var);
+    }
+    .mobile-menu.open { display: flex; }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ════════════════════════════════════════════
+       HERO
+    ═════════════════════════════════════════════ */
+    .hero {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #0a0f2e 0%, #0041c8 50%, #006d43 100%);
+      color: #fff; padding: 120px 0 100px;
+      text-align: center;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25);
+      border-radius: 100px; padding: 6px 16px; font-size: .82rem;
+      font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 28px; animation: fadeIn .6s ease;
+    }
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700; line-height: 1.15; margin-bottom: 24px;
+      animation: fadeUp .7s ease both;
+    }
+    .hero h1 em { font-style: italic; color: var(--secondary-container); }
+    .hero p {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(255,255,255,.82); max-width: 620px; margin: 0 auto 40px;
+      animation: fadeUp .7s .15s ease both;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeUp .7s .3s ease both; }
+    .hero-btns .btn-outline { color: #fff; border-color: rgba(255,255,255,.6); }
+    .hero-btns .btn-outline:hover { background: rgba(255,255,255,.15); }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 48px; margin-top: 72px;
+      flex-wrap: wrap; animation: fadeUp .7s .45s ease both;
+    }
+    .hero-stat strong { display: block; font-size: 2.2rem; font-weight: 700; }
+    .hero-stat span   { font-size: .85rem; color: rgba(255,255,255,.65); }
+
+    /* ════════════════════════════════════════════
+       SERVICES
+    ═════════════════════════════════════════════ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .service-card {
+      background: #fff; border-radius: var(--radius);
+      padding: 32px; border: 1px solid var(--outline-var);
+      box-shadow: var(--shadow);
+      transition: all .3s; cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 36px rgba(0,65,200,.14);
+      border-color: var(--primary);
+    }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 1.6rem;
+    }
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .service-card p  { color: var(--on-surface-var); font-size: .92rem; line-height: 1.7; }
+
+    /* ════════════════════════════════════════════
+       GROWTH FUNNEL
+    ═════════════════════════════════════════════ */
+    .funnel-bg { background: linear-gradient(135deg, #f0f4ff 0%, #f0faf6 100%); }
+    .funnel-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; margin-top: 48px; position: relative;
+    }
+    .funnel-step {
+      background: #fff; border-radius: var(--radius); padding: 32px 24px;
+      text-align: center; border: 1px solid var(--outline-var);
+      box-shadow: var(--shadow); position: relative;
+    }
+    .funnel-number {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 700; color: #fff;
+      margin: 0 auto 20px;
+    }
+    .funnel-step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .funnel-step p  { color: var(--on-surface-var); font-size: .9rem; line-height: 1.65; }
+    .funnel-arrow {
+      display: none;
+    }
+
+    /* ════════════════════════════════════════════
+       KPIs
+    ═════════════════════════════════════════════ */
+    .kpi-stats {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .kpi-card {
+      background: #fff; border-radius: var(--radius); padding: 28px 24px;
+      border: 1px solid var(--outline-var); box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .kpi-icon { font-size: 2rem; margin-bottom: 12px; }
+    .kpi-value { font-size: 2.4rem; font-weight: 700; color: var(--primary); }
+    .kpi-label { color: var(--on-surface-var); font-size: .88rem; margin-top: 4px; }
+
+    .revenue-bars { margin-top: 48px; }
+    .revenue-bars h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 28px; text-align: center; }
+    .bar-item { margin-bottom: 20px; }
+    .bar-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: .9rem; font-weight: 500; }
+    .bar-track { height: 10px; background: var(--outline-var); border-radius: 10px; overflow: hidden; }
+    .bar-fill  {
+      height: 100%; border-radius: 10px;
+      animation: progressFill 1.2s ease forwards;
+      width: var(--target-w);
+    }
+
+    /* ════════════════════════════════════════════
+       ROADMAP
+    ═════════════════════════════════════════════ */
+    .roadmap-bg { background: linear-gradient(135deg, #0a0f2e 0%, #0041c8 100%); color: #fff; }
+    .roadmap-bg .section-title { color: #fff; }
+    .roadmap-bg .section-subtitle { color: rgba(255,255,255,.7); }
+    .roadmap-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .roadmap-card {
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius); padding: 28px 24px;
+      backdrop-filter: blur(8px); transition: all .3s;
+    }
+    .roadmap-card:hover { background: rgba(255,255,255,.18); transform: translateY(-4px); }
+    .roadmap-quarter {
+      display: inline-block; padding: 4px 12px; border-radius: 100px;
+      font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .roadmap-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .roadmap-card ul li {
+      color: rgba(255,255,255,.75); font-size: .88rem; padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08); display: flex; gap: 8px;
+    }
+    .roadmap-card ul li:last-child { border-bottom: none; }
+    .roadmap-card ul li::before { content: '▸'; color: var(--secondary-container); flex-shrink: 0; }
+
+    /* ════════════════════════════════════════════
+       ADVANTAGES & RISKS
+    ═════════════════════════════════════════════ */
+    .adv-risk-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px;
+    }
+    @media (max-width: 680px) { .adv-risk-grid { grid-template-columns: 1fr; } }
+    .adv-card, .risk-card {
+      border-radius: var(--radius); padding: 32px;
+    }
+    .adv-card { background: #f0faf6; border: 1px solid #b2f0d4; }
+    .risk-card { background: #fff5f5; border: 1px solid #fdd; }
+    .adv-card h3 { color: var(--secondary); font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .risk-card h3 { color: var(--error); font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .adv-card ul li, .risk-card ul li {
+      padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.06);
+      font-size: .92rem; display: flex; gap: 10px; align-items: flex-start;
+    }
+    .adv-card ul li:last-child, .risk-card ul li:last-child { border-bottom: none; }
+    .adv-card ul li::before { content: '✓'; color: var(--secondary); font-weight: 700; flex-shrink: 0; }
+    .risk-card ul li::before { content: '!'; color: var(--error); font-weight: 700; flex-shrink: 0; }
+
+    /* ════════════════════════════════════════════
+       QUOTE
+    ═════════════════════════════════════════════ */
+    .quote-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: #fff; text-align: center; padding: 80px 0;
+    }
+    .quote-marks { font-size: 5rem; line-height: .5; color: rgba(255,255,255,.3); font-family: Georgia, serif; }
+    .quote-text {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      max-width: 800px; margin: 24px auto 32px;
+      line-height: 1.7; color: rgba(255,255,255,.95);
+    }
+    .quote-author { font-weight: 700; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase; color: var(--secondary-container); }
+
+    /* ════════════════════════════════════════════
+       FOOTER
+    ═════════════════════════════════════════════ */
+    footer {
+      background: #0a0f2e; color: rgba(255,255,255,.7); text-align: center; padding: 48px 24px;
+    }
+    .footer-logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 16px; }
+    .footer-logo span { color: var(--secondary-container); }
+    .footer-socials { display: flex; justify-content: center; gap: 20px; margin: 24px 0; }
+    .footer-socials a {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: .85rem; font-weight: 700;
+      transition: all .25s;
+    }
+    .footer-socials a:hover { background: var(--primary); border-color: var(--primary); }
+    .footer-copy { font-size: .82rem; }
+
+    /* ════════════════════════════════════════════
+       SCROLL ANIMATIONS (Intersection Observer)
+    ═════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ════════════════════════════════════════════
+       RESPONSIVE TWEAKS
+    ═════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .hero { padding: 80px 0 70px; }
+      .hero-stats { gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">Hy<span>Maxpro</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Dịch Vụ</a></li>
+      <li><a href="#funnel">Phễu Tăng Trưởng</a></li>
+      <li><a href="#kpis">KPIs</a></li>
+      <li><a href="#roadmap">Lộ Trình</a></li>
+      <li><a href="#advantages">Ưu Thế</a></li>
+    </ul>
+    <a href="#services" class="btn btn-primary nav-cta" style="padding:10px 22px;font-size:.88rem;">Bắt Đầu</a>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMobileMenu()">Dịch Vụ</a>
+    <a href="#funnel"   onclick="closeMobileMenu()">Phễu Tăng Trưởng</a>
+    <a href="#kpis"     onclick="closeMobileMenu()">KPIs</a>
+    <a href="#roadmap"  onclick="closeMobileMenu()">Lộ Trình</a>
+    <a href="#advantages" onclick="closeMobileMenu()">Ưu Thế</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ══════════════════════════════════ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="material-icons-round" style="font-size:1rem;">bolt</span>
+      Chiến Lược Kinh Doanh 2024
+    </div>
+    <h1>Định hình tương lai bằng<br/><em>Dữ liệu &amp; Đổi Mới</em></h1>
+    <p>Hy Maxpro cung cấp các giải pháp chiến lược toàn diện – từ phân tích thị trường đến mở rộng toàn cầu – giúp doanh nghiệp bứt phá và dẫn đầu.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn btn-primary">
+        <span class="material-icons-round" style="font-size:1.1rem;">rocket_launch</span>
+        Bắt Đầu Ngay
+      </a>
+      <a href="#roadmap" class="btn btn-outline">Xem Lộ Trình</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong>20+</strong>
+        <span>Workshop Chiến Lược</span>
+      </div>
+      <div class="hero-stat">
+        <strong>500+</strong>
+        <span>Người Tham Gia</span>
+      </div>
+      <div class="hero-stat">
+        <strong>94%</strong>
+        <span>Tỉ Lệ Thành Công</span>
+      </div>
+      <div class="hero-stat">
+        <strong>15M+</strong>
+        <span>Doanh Thu Tác Động</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ SERVICES ══════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-tag">Dịch Vụ</span>
+      <h2 class="section-title">Giải Pháp Chiến Lược Toàn Diện</h2>
+      <p class="section-subtitle">Chúng tôi cung cấp bộ dịch vụ tích hợp giúp doanh nghiệp phát triển bền vững trong môi trường cạnh tranh ngày càng khốc liệt.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal delay-1">
+        <div class="service-icon" style="background:#e8f0fe;">📊</div>
+        <h3>Phân Tích Thị Trường</h3>
+        <p>Nghiên cứu chuyên sâu về xu hướng thị trường, đối thủ cạnh tranh và cơ hội tăng trưởng tiềm năng dành riêng cho doanh nghiệp của bạn.</p>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="service-icon" style="background:#e6f4ea;">🗺️</div>
+        <h3>Thiết Kế Chiến Lược</h3>
+        <p>Xây dựng lộ trình chiến lược tùy chỉnh với các mục tiêu rõ ràng, chỉ số đo lường và kế hoạch thực thi chi tiết từng bước.</p>
+      </div>
+      <div class="service-card reveal delay-3">
+        <div class="service-icon" style="background:#fce8e6;">💻</div>
+        <h3>Chuyển Đổi Số</h3>
+        <p>Triển khai các công nghệ tiên tiến và quy trình kỹ thuật số hóa toàn diện, tối ưu hiệu suất và nâng cao trải nghiệm khách hàng.</p>
+      </div>
+      <div class="service-card reveal delay-1">
+        <div class="service-icon" style="background:#fff3e0;">⚙️</div>
+        <h3>Tối Ưu Vận Hành</h3>
+        <p>Phân tích và cải thiện quy trình nội bộ nhằm giảm thiểu chi phí, nâng cao năng suất và xây dựng nền tảng vận hành hiệu quả lâu dài.</p>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="service-icon" style="background:#f3e8fd;">🎯</div>
+        <h3>Định Vị Thương Hiệu</h3>
+        <p>Xây dựng câu chuyện thương hiệu mạnh mẽ và nhất quán, tạo sự khác biệt vượt trội so với đối thủ và kết nối sâu sắc với khách hàng mục tiêu.</p>
+      </div>
+      <div class="service-card reveal delay-3">
+        <div class="service-icon" style="background:#e3f2fd;">🌏</div>
+        <h3>Mở Rộng Toàn Cầu</h3>
+        <p>Chiến lược gia nhập thị trường quốc tế, quản lý rủi ro xuyên biên giới và xây dựng mạng lưới đối tác chiến lược toàn cầu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FUNNEL ════════════════════════════════ -->
+<section id="funnel" class="funnel-bg">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-tag">Phương Pháp</span>
+      <h2 class="section-title">Phễu Tăng Trưởng 4 Bước</h2>
+      <p class="section-subtitle">Quy trình được kiểm chứng qua hàng trăm dự án, đảm bảo chuyển hóa tiềm năng thành kết quả thực tế.</p>
+    </div>
+    <div class="funnel-steps">
+      <div class="funnel-step reveal delay-1">
+        <div class="funnel-number" style="background:linear-gradient(135deg,#0041c8,#0055ff);">1</div>
+        <h3>Khám Phá</h3>
+        <p>Đánh giá toàn diện hiện trạng doanh nghiệp, phân tích điểm mạnh – yếu, nhận diện cơ hội và rủi ro tiềm ẩn trên thị trường.</p>
+      </div>
+      <div class="funnel-step reveal delay-2">
+        <div class="funnel-number" style="background:linear-gradient(135deg,#006d43,#00a068);">2</div>
+        <h3>Lập Kế Hoạch</h3>
+        <p>Xây dựng chiến lược chi tiết với mục tiêu SMART, phân bổ nguồn lực tối ưu và thiết lập hệ thống chỉ số theo dõi hiệu suất.</p>
+      </div>
+      <div class="funnel-step reveal delay-3">
+        <div class="funnel-number" style="background:linear-gradient(135deg,#674b00,#9e7200);">3</div>
+        <h3>Thực Thi</h3>
+        <p>Triển khai kế hoạch với đội ngũ chuyên gia, đồng hành cùng doanh nghiệp trong từng giai đoạn và điều chỉnh linh hoạt khi cần thiết.</p>
+      </div>
+      <div class="funnel-step reveal delay-4">
+        <div class="funnel-number" style="background:linear-gradient(135deg,#c0006e,#e0008a);">4</div>
+        <h3>Tối Ưu Hóa</h3>
+        <p>Đo lường kết quả liên tục, phân tích dữ liệu thực tế và cải tiến không ngừng để duy trì đà tăng trưởng bền vững dài hạn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KPIs ══════════════════════════════════ -->
+<section id="kpis">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-tag">Hiệu Suất</span>
+      <h2 class="section-title">Chỉ Số & Doanh Thu</h2>
+      <p class="section-subtitle">Những con số minh chứng cho cam kết và năng lực thực thi của Hy Maxpro.</p>
+    </div>
+    <div class="kpi-stats">
+      <div class="kpi-card reveal delay-1">
+        <div class="kpi-icon">🏆</div>
+        <div class="kpi-value">20+</div>
+        <div class="kpi-label">Workshop Chiến Lược</div>
+      </div>
+      <div class="kpi-card reveal delay-2">
+        <div class="kpi-icon">👥</div>
+        <div class="kpi-value">500+</div>
+        <div class="kpi-label">Người Tham Gia Tích Cực</div>
+      </div>
+      <div class="kpi-card reveal delay-3">
+        <div class="kpi-icon">✅</div>
+        <div class="kpi-value">94%</div>
+        <div class="kpi-label">Tỉ Lệ Thành Công</div>
+      </div>
+      <div class="kpi-card reveal delay-4">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-value">15M+</div>
+        <div class="kpi-label">Tác Động Doanh Thu</div>
+      </div>
+    </div>
+
+    <div class="revenue-bars reveal" style="margin-top:64px;">
+      <h3>Cơ Cấu Doanh Thu</h3>
+      <div style="max-width:640px;margin:0 auto;">
+        <div class="bar-item">
+          <div class="bar-header"><span>🔵 Cấp phép SaaS</span><span>45%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--target-w:45%;background:var(--primary);"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-header"><span>🟢 Tư vấn chiến lược</span><span>30%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--target-w:30%;background:var(--secondary);"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-header"><span>🟠 Dịch vụ quản lý</span><span>15%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--target-w:15%;background:#e06a00;"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-header"><span>🟣 Phí định kỳ</span><span>10%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--target-w:10%;background:#7b3fcf;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROADMAP ═══════════════════════════════ -->
+<section id="roadmap" class="roadmap-bg">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-tag" style="background:rgba(255,255,255,.15);color:#fff;">Lộ Trình</span>
+      <h2 class="section-title">Kế Hoạch Chiến Lược 12 Tháng</h2>
+      <p class="section-subtitle">Lộ trình rõ ràng theo từng quý, từ nền tảng đến tăng tốc và mở rộng quy mô.</p>
+    </div>
+    <div class="roadmap-grid">
+      <div class="roadmap-card reveal delay-1">
+        <div class="roadmap-quarter" style="background:rgba(0,200,120,.2);color:#75f8b3;">Q1 – Nền Tảng</div>
+        <h3>Xây Dựng Cơ Sở</h3>
+        <ul>
+          <li>Đánh giá toàn diện hiện trạng</li>
+          <li>Xác định thị trường mục tiêu</li>
+          <li>Thiết lập hệ thống KPI</li>
+          <li>Ra mắt sản phẩm MVP</li>
+        </ul>
+      </div>
+      <div class="roadmap-card reveal delay-2">
+        <div class="roadmap-quarter" style="background:rgba(0,120,255,.2);color:#90c4ff;">Q2 – Tăng Tốc</div>
+        <h3>Thúc Đẩy Tăng Trưởng</h3>
+        <ul>
+          <li>Ra mắt chiến dịch marketing số</li>
+          <li>Mở rộng kênh phân phối</li>
+          <li>Tối ưu phễu chuyển đổi</li>
+          <li>Xây dựng đội ngũ bán hàng</li>
+        </ul>
+      </div>
+      <div class="roadmap-card reveal delay-3">
+        <div class="roadmap-quarter" style="background:rgba(200,150,0,.2);color:#ffd670;">Q3 – Mở Rộng</div>
+        <h3>Nhân Rộng Mô Hình</h3>
+        <ul>
+          <li>Gia nhập thị trường mới</li>
+          <li>Hợp tác đối tác chiến lược</li>
+          <li>Nâng cấp nền tảng công nghệ</li>
+          <li>Chương trình khách hàng thân thiết</li>
+        </ul>
+      </div>
+      <div class="roadmap-card reveal delay-4">
+        <div class="roadmap-quarter" style="background:rgba(200,0,100,.2);color:#ff90c8;">Q4 – Tổng Kết</div>
+        <h3>Củng Cố & Đổi Mới</h3>
+        <ul>
+          <li>Đánh giá toàn bộ kết quả</li>
+          <li>Tối ưu mô hình doanh thu</li>
+          <li>Lập kế hoạch năm tiếp theo</li>
+          <li>Mở rộng quốc tế giai đoạn 2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ADVANTAGES & RISKS ═══════════════════ -->
+<section id="advantages">
+  <div class="container">
+    <div class="reveal text-center">
+      <span class="section-tag">Phân Tích</span>
+      <h2 class="section-title">Ưu Thế &amp; Rủi Ro Chiến Lược</h2>
+      <p class="section-subtitle">Nhìn nhận toàn diện cả ưu thế cạnh tranh và các thách thức cần quản lý để đưa ra quyết định sáng suốt.</p>
+    </div>
+    <div class="adv-risk-grid reveal">
+      <div class="adv-card">
+        <h3><span class="material-icons-round">verified</span> Ưu Thế Cạnh Tranh</h3>
+        <ul>
+          <li>Đội ngũ chuyên gia với hơn 10 năm kinh nghiệm thực chiến</li>
+          <li>Phương pháp luận dựa trên dữ liệu, được kiểm chứng thực tế</li>
+          <li>Mạng lưới đối tác rộng khắp trong và ngoài nước</li>
+          <li>Công nghệ AI tiên tiến tích hợp vào quy trình tư vấn</li>
+          <li>Tỉ lệ thành công 94% qua các dự án đã triển khai</li>
+          <li>Hỗ trợ liên tục 24/7 trong suốt hành trình chuyển đổi</li>
+        </ul>
+      </div>
+      <div class="risk-card">
+        <h3><span class="material-icons-round">warning</span> Rủi Ro Cần Quản Lý</h3>
+        <ul>
+          <li>Biến động thị trường và bất ổn kinh tế vĩ mô toàn cầu</li>
+          <li>Thay đổi nhanh chóng trong quy định và chính sách pháp lý</li>
+          <li>Cạnh tranh ngày càng gay gắt từ các đối thủ trong và ngoài nước</li>
+          <li>Phụ thuộc vào việc nâng cấp liên tục năng lực nội bộ</li>
+          <li>Rủi ro chuyển đổi kỹ thuật số và an ninh mạng</li>
+          <li>Quản lý kỳ vọng và sự thay đổi văn hóa tổ chức</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE ══════════════════════════════════ -->
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-marks">"</div>
+    <p class="quote-text">
+      Chiến lược không chỉ là lập kế hoạch cho tương lai – đó là việc trao quyền cho từng thành viên trong tổ chức để họ hiểu được tầm nhìn và hành động nhất quán mỗi ngày, biến tiềm năng thành thực tế vượt trội.
+    </p>
+    <div class="quote-author">— Ban Lãnh Đạo Hy Maxpro</div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════ -->
+<footer>
+  <div class="footer-logo">Hy<span>Maxpro</span></div>
+  <p style="max-width:480px;margin:0 auto 8px;font-size:.9rem;">
+    Kiến tạo tương lai doanh nghiệp thông qua chiến lược dữ liệu và đổi mới sáng tạo.
+  </p>
+  <div class="footer-socials">
+    <a href="#" title="LinkedIn">in</a>
+    <a href="#" title="Twitter">tw</a>
+    <a href="#" title="Facebook">fb</a>
+    <a href="https://github.com/Trangsct/Hy-Maxpro" title="GitHub" target="_blank">gh</a>
+  </div>
+  <p class="footer-copy">© 2024 Hy Maxpro. All rights reserved.</p>
+</footer>
+
+<script>
+  // ── Mobile Menu ──────────────────────────────
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+
+  // ── Scroll Reveal ────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Active nav link on scroll ─────────────────
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 90) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--primary)' : '';
+    });
+  });
+</script>
+</body>
+</html>
