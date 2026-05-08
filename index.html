@@ -543,6 +543,118 @@
     .capital-tagline p { font-size: 1.1rem; font-weight: 700; color: var(--secondary-container); }
 
     /* ════════════════════════════════════════════
+       PRICING TAB
+    ═════════════════════════════════════════════ */
+    .pr-section { padding: var(--section-gap) 0; }
+    .pr-section + .pr-section { border-top: 1px solid var(--outline-var); }
+    .pr-section.alt { background: linear-gradient(135deg,#f0f4ff,#f5fff9); }
+    .pr-section.dark { background: linear-gradient(135deg,#0a1628,#003080); color:#fff; }
+
+    .pr-sec-title { display:flex; align-items:center; gap:14px; margin-bottom:32px; }
+    .pr-sec-title .pt-icon { width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0; }
+    .pt-blue  { background:rgba(0,65,200,.1); }
+    .pt-gold  { background:rgba(200,168,75,.15); }
+    .pt-green { background:rgba(29,122,80,.1); }
+    .pt-orange{ background:rgba(212,98,42,.1); }
+    .pr-sec-title h2 { font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:var(--on-surface); }
+    .pr-sec-title h2 small { display:block;font-family:var(--font-sans);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:2px; }
+
+    /* Service list */
+    .sv-list { display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:24px; }
+    .sv-item { background:#fff;border:1px solid var(--outline-var);border-radius:10px;padding:14px 18px;display:flex;align-items:flex-start;gap:10px;font-size:.9rem;font-weight:500;transition:all .25s; }
+    .sv-item:hover { transform:translateY(-2px);box-shadow:0 4px 18px rgba(0,65,200,.1); }
+    .sv-item::before { content:'◆';color:var(--primary);font-size:.65rem;margin-top:4px;flex-shrink:0; }
+
+    /* Pricing group header */
+    .pg-header { border-radius:10px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem; }
+    .pg-blue   { background:rgba(0,65,200,.08);color:var(--primary); }
+    .pg-orange { background:rgba(212,98,42,.1);color:#c04a00; }
+    .pg-green  { background:rgba(29,122,80,.1);color:var(--secondary); }
+    .pg-gold   { background:rgba(200,168,75,.15);color:#7a5e00; }
+    .pg-header em { font-size:.82rem;font-weight:400;opacity:.75;margin-left:4px; }
+
+    /* Price cards */
+    .pr-cards { display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-bottom:40px; }
+    .pr-card { background:#fff;border-radius:14px;border:1px solid var(--outline-var);overflow:hidden;transition:all .3s; }
+    .pr-card:hover { transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,65,200,.12); }
+    .pr-card-head { padding:20px 22px 16px;border-bottom:1px solid var(--outline-var); }
+    .pr-card-head h3 { font-size:1rem;font-weight:700;color:var(--on-surface);margin-bottom:6px; }
+    .pr-price { font-size:1.1rem;font-weight:700;color:var(--primary);margin-bottom:4px; }
+    .pr-fit   { font-size:.78rem;color:var(--on-surface-var);font-style:italic; }
+    .pr-card-body { padding:16px 22px 20px; }
+    .pr-card-body ul { list-style:none; }
+    .pr-card-body ul li { font-size:.88rem;padding:5px 0;padding-left:16px;position:relative;border-bottom:1px solid var(--outline-var); }
+    .pr-card-body ul li:last-child { border-bottom:none; }
+    .pr-card-body ul li::before { content:'✦';position:absolute;left:0;color:var(--primary);font-size:.6rem;top:8px; }
+    .pr-tip { display:inline-block;margin-top:10px;padding:4px 12px;border-radius:20px;font-size:.76rem;font-weight:600;background:rgba(0,65,200,.08);color:var(--primary); }
+
+    /* Loan */
+    .loan-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px; }
+    @media(max-width:560px){.loan-grid{grid-template-columns:1fr;}}
+    .loan-item { background:#fff;border-radius:12px;border:1px solid var(--outline-var);padding:20px 22px; }
+    .loan-item h4 { font-size:.9rem;font-weight:700;color:var(--on-surface);margin-bottom:6px; }
+    .loan-amount { font-size:1.3rem;font-weight:700;color:var(--secondary); }
+
+    /* Combo cards */
+    .combo-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px; }
+    .combo-card2 { background:linear-gradient(135deg,#0a1628,#0041c8);color:#fff;border-radius:14px;padding:24px 22px;position:relative;overflow:hidden; }
+    .combo-card2::before { content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;border-radius:50%;background:rgba(200,168,75,.15); }
+    .combo-card2 h4 { font-size:.95rem;font-weight:700;color:#e8c97a;margin-bottom:6px; }
+    .combo-card2 .c2-price { font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:14px; }
+    .combo-card2 ul { list-style:none; }
+    .combo-card2 ul li { font-size:.85rem;color:rgba(255,255,255,.8);padding:3px 0 3px 14px;position:relative; }
+    .combo-card2 ul li::before { content:'▸';position:absolute;left:0;color:#e8c97a; }
+
+    /* Partner highlight box */
+    .partner-highlight { background:linear-gradient(135deg,var(--primary),var(--secondary));border-radius:14px;padding:24px 28px;color:#fff;margin-top:20px; }
+    .partner-highlight p { font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.9); }
+    .partner-highlight strong { color:#e8c97a; }
+
+    /* ════════════════════════════════════════════
+       WORKSHOP TAB
+    ═════════════════════════════════════════════ */
+    .ws-section { padding:var(--section-gap) 0; }
+    .ws-section + .ws-section { border-top:1px solid var(--outline-var); }
+    .ws-section.ws-dark { background:linear-gradient(135deg,#0a1628,#003080);color:#fff; }
+    .ws-section.ws-alt  { background:linear-gradient(135deg,#f0f4ff,#f5fff9); }
+
+    .ws-group-title { font-family:var(--font-serif);font-size:1.2rem;font-weight:700;color:var(--on-surface);margin-bottom:18px;display:flex;align-items:center;gap:10px; }
+    .ws-group-title .wg-num { display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:var(--primary);color:#fff;border-radius:8px;font-size:.82rem;font-weight:700;flex-shrink:0; }
+
+    .slide-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:40px; }
+    .slide-card2 { background:#fff;border:1px solid var(--outline-var);border-radius:12px;padding:18px;transition:all .3s; }
+    .slide-card2:hover { transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,65,200,.1);border-color:var(--primary); }
+    .sl-num   { font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin-bottom:6px; }
+    .sl-title { font-size:.95rem;font-weight:700;color:var(--on-surface);margin-bottom:8px; }
+    .sl-body  { font-size:.85rem;color:var(--on-surface-var);line-height:1.65; }
+    .sl-body ul { list-style:none; }
+    .sl-body ul li { padding:2px 0 2px 12px;position:relative; }
+    .sl-body ul li::before { content:'·';position:absolute;left:0;color:var(--primary);font-size:1.1rem;line-height:1; }
+    .sl-cta { display:inline-block;margin-top:8px;font-size:.76rem;font-weight:600;color:#c04a00;background:rgba(212,98,42,.1);padding:3px 10px;border-radius:20px; }
+
+    /* Quotes block */
+    .quotes-block { background:linear-gradient(135deg,#0a1628,#003080);border-radius:var(--radius);padding:40px;margin-top:0; }
+    .quotes-block h3 { font-family:var(--font-serif);font-size:1.3rem;font-weight:700;color:#e8c97a;text-align:center;margin-bottom:28px; }
+    .quote-item2 { border-left:3px solid #e8c97a;padding:14px 20px;margin-bottom:16px;color:rgba(255,255,255,.88);font-size:1rem;font-style:italic;line-height:1.7; }
+    .quote-item2:last-child { margin-bottom:0; }
+
+    /* Benefits */
+    .benefit-grid2 { display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:24px; }
+    .benefit-card2 { background:#fff;border-radius:12px;border:1px solid var(--outline-var);padding:20px;display:flex;gap:12px;align-items:flex-start; }
+    .benefit-card2 .bi-icon { font-size:1.5rem;flex-shrink:0; }
+    .benefit-card2 p { font-size:.9rem;font-weight:500;color:var(--on-surface);line-height:1.5; }
+
+    /* Process steps */
+    .process-row { display:flex;flex-wrap:wrap;gap:0;margin-top:16px; }
+    .ps-item { display:flex;align-items:center;gap:0;flex:1 1 auto; }
+    .ps-box { background:#fff;border:1px solid var(--outline-var);border-radius:10px;padding:14px 16px;flex:1;text-align:center;transition:all .3s; }
+    .ps-box:hover { border-color:var(--primary);box-shadow:0 4px 14px rgba(0,65,200,.1); }
+    .ps-num   { font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary); }
+    .ps-label { font-size:.88rem;font-weight:600;color:var(--on-surface);margin-top:4px; }
+    .ps-arrow { font-size:1.2rem;color:var(--primary);padding:0 6px;flex-shrink:0; }
+    @media(max-width:580px){ .process-row{flex-direction:column;} .ps-arrow{transform:rotate(90deg);text-align:center;} }
+
+    /* ════════════════════════════════════════════
        RESPONSIVE TWEAKS
     ═════════════════════════════════════════════ */
     @media (max-width: 600px) {
@@ -583,10 +695,16 @@
 <!-- ═══ PAGE TABS ══════════════════════════════ -->
 <div class="page-tabs" id="pageTabs">
   <button class="page-tab active" onclick="switchTab('profile', this)">
-    🏢 Giới Thiệu Công Ty
+    🏢 Giới Thiệu
+  </button>
+  <button class="page-tab" onclick="switchTab('pricing', this)">
+    💰 Dịch Vụ & Báo Giá
+  </button>
+  <button class="page-tab" onclick="switchTab('workshop', this)">
+    🎤 Kịch Bản Hội Thảo
   </button>
   <button class="page-tab" onclick="switchTab('strategy', this)">
-    📊 Chiến Lược & Dịch Vụ
+    📊 Chiến Lược
   </button>
 </div>
 
@@ -1298,6 +1416,197 @@
   </section>
 
 </div><!-- end tab-profile -->
+
+<!-- ═══════════════════════════════════════════
+     TAB 2: DỊCH VỤ & BÁO GIÁ
+════════════════════════════════════════════ -->
+<div id="tab-pricing" class="page-content">
+
+  <div style="background:linear-gradient(135deg,#0a1628 0%,#0041c8 60%,#006d43 100%);color:#fff;padding:80px 0 64px;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E&quot;);"></div>
+    <div class="container" style="position:relative;">
+      <div class="hero-badge animate-fadein">💼 Giải Pháp Tài Chính Thực Chiến</div>
+      <h1 style="font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.4rem);font-weight:700;margin:20px 0 16px;line-height:1.2;" class="animate-fadeup">Dịch Vụ & Bảng Giá</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,.8);max-width:560px;margin:0 auto;" class="animate-fadeup delay-1">Hệ thống gói dịch vụ tích hợp – từ kế toán thuế đến tối ưu tài sản và kết nối vốn ngân hàng.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="pr-section">
+      <div class="pr-sec-title reveal">
+        <div class="pt-icon pt-blue">🏢</div>
+        <h2><small>Tổng Quan</small>Các Dịch Vụ Cung Cấp</h2>
+      </div>
+      <div class="sv-list reveal">
+        <div class="sv-item">Đại lý kế toán và thuế</div>
+        <div class="sv-item">Tư vấn tái cấu trúc tài sản, quản lý tài sản</div>
+        <div class="sv-item">Tư vấn quản lý dòng tiền</div>
+        <div class="sv-item">Tư vấn vay vốn ngân hàng</div>
+        <div class="sv-item">Tư vấn tối ưu hóa lợi nhuận</div>
+        <div class="sv-item">Đào tạo, huấn luyện thực chiến về quản lý doanh nghiệp toàn diện</div>
+      </div>
+      <div class="partner-highlight reveal" style="margin-top:24px;">
+        <p><strong>Cách thức phát triển khách hàng:</strong> Là đối tác của <strong>Agribank</strong> – phối hợp với Hội doanh nghiệp và người kinh doanh tổ chức các buổi đào tạo tại các Xã, Phường. Kinh phí do <strong>Agribank & Hội</strong> chi trả → phát triển cộng đồng, tệp khách hàng để cung cấp dịch vụ.</p>
+      </div>
+    </div>
+
+    <div class="pr-section">
+      <div class="pg-header pg-blue reveal">🔷 I. Gói Kế Toán – Thuế <em>(Tạo khách hàng)</em></div>
+      <div class="pr-cards">
+        <div class="pr-card reveal delay-1">
+          <div class="pr-card-head"><h3>1. Gói Cơ Bản</h3><div class="pr-price">1.500.000 – 2.500.000 VNĐ/tháng</div><div class="pr-fit">Phù hợp: Hộ kinh doanh, doanh nghiệp nhỏ</div></div>
+          <div class="pr-card-body"><ul><li>Hạch toán sổ sách</li><li>Báo cáo thuế định kỳ</li><li>Báo cáo tài chính năm</li><li>Tư vấn cơ bản</li></ul></div>
+        </div>
+        <div class="pr-card reveal delay-2">
+          <div class="pr-card-head"><h3>2. Gói Nâng Cao</h3><div class="pr-price">3.000.000 – 5.000.000 VNĐ/tháng</div><div class="pr-fit">Phù hợp: Doanh nghiệp đang phát triển</div></div>
+          <div class="pr-card-body"><ul><li>Toàn bộ gói cơ bản</li><li>Báo cáo quản trị nội bộ</li><li>Phân tích chi phí</li><li>Tư vấn tối ưu thuế</li></ul></div>
+        </div>
+        <div class="pr-card reveal delay-3">
+          <div class="pr-card-head"><h3>3. Gói Chuyên Sâu</h3><div class="pr-price">6.000.000 – 10.000.000 VNĐ/tháng</div><div class="pr-fit">Phù hợp: DN muốn chuẩn hoá tài chính</div></div>
+          <div class="pr-card-body"><ul><li>Toàn bộ gói nâng cao</li><li>Thiết lập hệ thống kế toán</li><li>Làm việc trực tiếp với ngân hàng</li><li>Tư vấn tài chính định kỳ</li></ul></div>
+        </div>
+      </div>
+
+      <div class="pg-header pg-orange reveal">🔶 II. Gói Quản Lý Tài Sản – Dòng Tiền <em>(Core – Kiếm tiền chính)</em></div>
+      <div class="pr-cards">
+        <div class="pr-card reveal delay-1">
+          <div class="pr-card-head"><h3>1. Gói Phân Tích & Chẩn Đoán</h3><div class="pr-price">5.000.000 – 10.000.000 VNĐ/lần</div></div>
+          <div class="pr-card-body"><ul><li>Phân tích tài sản doanh nghiệp</li><li>Phân tích dòng tiền thực tế</li><li>Xác định điểm nghẽn tài chính</li><li>Báo cáo đề xuất giải pháp</li></ul><div class="pr-tip">🎯 Dùng để bán entry</div></div>
+        </div>
+        <div class="pr-card reveal delay-2">
+          <div class="pr-card-head"><h3>2. Gói Tối Ưu Dòng Tiền</h3><div class="pr-price">15.000.000 – 30.000.000 VNĐ / 1–2 tháng</div></div>
+          <div class="pr-card-body"><ul><li>Tái cấu trúc tài sản</li><li>Giảm tồn kho, tối ưu công nợ</li><li>Xây dựng hệ thống quản lý dòng tiền</li><li>Theo dõi & điều chỉnh</li></ul><div class="pr-tip">💰 Bắt đầu có lợi nhuận tốt</div></div>
+        </div>
+        <div class="pr-card reveal delay-3">
+          <div class="pr-card-head"><h3>3. Gói Đồng Hành Tài Chính</h3><div class="pr-price">10.000.000 – 20.000.000 VNĐ/tháng</div></div>
+          <div class="pr-card-body"><ul><li>Theo dõi dòng tiền hàng tháng</li><li>Tư vấn tài chính liên tục</li><li>Cảnh báo rủi ro sớm</li><li>Hỗ trợ ra quyết định</li></ul><div class="pr-tip">🔒 Gói giữ khách lâu dài</div></div>
+        </div>
+      </div>
+
+      <div class="pg-header pg-green reveal">🟩 III. Gói Hỗ Trợ Vay Vốn <em>(Rất dễ kiếm tiền)</em></div>
+      <div class="loan-grid reveal">
+        <div class="loan-item"><h4>Phí xử lý hồ sơ</h4><div class="loan-amount">5.000.000 – 15.000.000 VNĐ</div></div>
+        <div class="loan-item"><h4>Phí thành công</h4><div class="loan-amount">1% – 3% giá trị khoản vay</div></div>
+      </div>
+      <div class="partner-highlight reveal">
+        <p>Hỗ trợ: <strong>Chuẩn hoá hồ sơ tài chính</strong> · <strong>Xây dựng phương án vay</strong> · <strong>Kết nối ngân hàng</strong> (đặc biệt: <strong>Agribank</strong>)</p>
+      </div>
+    </div>
+
+    <div class="pr-section">
+      <div class="pg-header pg-gold reveal">🎯 IV. Gói Combo <em>(Dễ chốt nhất)</em></div>
+      <div class="combo-grid reveal">
+        <div class="combo-card2"><h4>Combo 1: "Chuẩn hoá tài chính"</h4><div class="c2-price">20 – 40 triệu</div><ul><li>Kế toán 3 tháng</li><li>Phân tích tài sản toàn diện</li><li>Setup hệ thống dòng tiền</li></ul></div>
+        <div class="combo-card2"><h4>Combo 2: "Giải cứu dòng tiền"</h4><div class="c2-price">30 – 60 triệu</div><ul><li>Tối ưu tài sản</li><li>Xử lý công nợ tồn đọng</li><li>Cải thiện dòng tiền thực tế</li></ul></div>
+        <div class="combo-card2"><h4>Combo 3: "Đồng hành phát triển"</h4><div class="c2-price">15 – 25 triệu/tháng</div><ul><li>Kế toán + tài chính tích hợp</li><li>Tư vấn liên tục 24/7</li><li>Hỗ trợ vay vốn khi cần</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div><!-- end tab-pricing -->
+
+<!-- ═══════════════════════════════════════════
+     TAB 3: KỊCH BẢN HỘI THẢO
+════════════════════════════════════════════ -->
+<div id="tab-workshop" class="page-content">
+
+  <div style="background:linear-gradient(135deg,#0a1628 0%,#674b00 50%,#0041c8 100%);color:#fff;padding:80px 0 64px;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;opacity:.04;background:repeating-linear-gradient(45deg,#fff 0,#fff 1px,transparent 0,transparent 50%);background-size:20px 20px;"></div>
+    <div class="container" style="position:relative;">
+      <div class="hero-badge animate-fadein">🎤 Kịch Bản Trình Bày Hội Thảo</div>
+      <h1 style="font-family:var(--font-serif);font-size:clamp(2rem,5vw,3.4rem);font-weight:700;margin:20px 0 16px;line-height:1.2;" class="animate-fadeup">Nội Dung Slide</h1>
+      <p style="font-size:1.05rem;color:rgba(255,255,255,.8);max-width:580px;margin:0 auto;" class="animate-fadeup delay-1">30 slide được thiết kế để dẫn dắt khán giả từ nhận ra vấn đề đến chốt giải pháp với Hy Maxpro.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="ws-section">
+      <div class="ws-group-title reveal"><span class="wg-num">1</span>Mở Đầu – Kết Nối Khán Giả (Slide 1–3)</div>
+      <div class="slide-grid">
+        <div class="slide-card2 reveal delay-1"><div class="sl-num">Slide 1</div><div class="sl-title">Trang Bìa</div><div class="sl-body"><strong>HY MAXPRO</strong><br>Giải pháp tài chính thực chiến<br><em style="color:#c04a00;">Vì sao doanh nghiệp có lãi nhưng vẫn thiếu tiền?</em></div></div>
+        <div class="slide-card2 reveal delay-2"><div class="sl-num">Slide 2</div><div class="sl-title">Giới Thiệu Diễn Giả</div><div class="sl-body"><ul><li>Hàn Hữu Hậu</li><li>Tư vấn tài chính doanh nghiệp</li><li>Đồng hành SME quản trị dòng tiền & vay vốn</li></ul></div></div>
+        <div class="slide-card2 reveal delay-3"><div class="sl-num">Slide 3</div><div class="sl-title">Kết Nối Khán Giả</div><div class="sl-body"><ul><li>Có doanh thu nhưng không giữ được tiền?</li><li>Khó vay vốn ngân hàng?</li><li>Không biết tiền đang đi đâu?</li></ul><div class="sl-cta">👐 Giơ tay / tương tác</div></div></div>
+      </div>
+
+      <div class="ws-group-title reveal"><span class="wg-num">2</span>Đánh Trúng Nỗi Đau (Slide 4–8)</div>
+      <div class="slide-grid">
+        <div class="slide-card2 reveal delay-1"><div class="sl-num">Slide 4</div><div class="sl-title">Thực Trạng</div><div class="sl-body">80% doanh nghiệp: có doanh thu · thiếu tiền · không biết vì sao<div class="sl-cta">📊 Số liệu gây sốc</div></div></div>
+        <div class="slide-card2 reveal delay-2"><div class="sl-num">Slide 5</div><div class="sl-title">Sai Lầm Phổ Biến</div><div class="sl-body"><ul><li>Nhầm lợi nhuận = tiền mặt</li><li>Không quản lý dòng tiền</li><li>Chi tiêu không kiểm soát</li></ul></div></div>
+        <div class="slide-card2 reveal delay-3"><div class="sl-num">Slide 6</div><div class="sl-title">Ví Dụ Thực Tế</div><div class="sl-body">Doanh thu 1 tỷ · Lợi nhuận 100 triệu<div class="sl-cta">→ Nhưng vẫn thiếu tiền!</div></div></div>
+        <div class="slide-card2 reveal delay-4"><div class="sl-num">Slide 7</div><div class="sl-title">Câu Hỏi Lớn</div><div class="sl-body" style="font-size:1.3rem;font-weight:700;color:var(--primary);text-align:center;padding:8px 0;">😭 Tiền đã đi đâu?</div></div>
+        <div class="slide-card2 reveal delay-5"><div class="sl-num">Slide 8</div><div class="sl-title">Chuyển Vấn Đề</div><div class="sl-body">Vấn đề không phải là kiếm tiền<div class="sl-cta">→ Mà là GIỮ TIỀN</div></div></div>
+      </div>
+
+      <div class="ws-group-title reveal"><span class="wg-num">3</span>Giải Thích Gốc Rễ (Slide 9–14)</div>
+      <div class="slide-grid">
+        <div class="slide-card2 reveal delay-1"><div class="sl-num">Slide 9</div><div class="sl-title">3 Nguyên Nhân Chính</div><div class="sl-body"><ul><li>Dòng tiền không được kiểm soát</li><li>Chi phí phình to không hay biết</li><li>Cấu trúc tài chính sai</li></ul></div></div>
+        <div class="slide-card2 reveal delay-2"><div class="sl-num">Slide 10</div><div class="sl-title">Dòng Tiền Là Gì?</div><div class="sl-body">Tiền vào – tiền ra<br><span style="color:var(--on-surface-var);">Không phải lợi nhuận kế toán</span></div></div>
+        <div class="slide-card2 reveal delay-3"><div class="sl-num">Slide 11</div><div class="sl-title">Ví Dụ Dễ Hiểu</div><div class="sl-body">Bán hàng chưa thu tiền · Nhập hàng phải trả tiền<div class="sl-cta">→ Thiếu tiền là tất yếu</div></div></div>
+        <div class="slide-card2 reveal delay-4"><div class="sl-num">Slide 12</div><div class="sl-title">Sai Lầm Chết Người</div><div class="sl-body"><ul><li>Không theo dõi dòng tiền hàng ngày</li><li>Không dự báo dòng tiền</li></ul></div></div>
+        <div class="slide-card2 reveal delay-5"><div class="sl-num">Slide 13</div><div class="sl-title">Hậu Quả</div><div class="sl-body"><ul><li>Không trả được nợ</li><li>Không xoay vòng vốn</li><li>Không phát triển được</li></ul></div></div>
+        <div class="slide-card2 reveal"><div class="sl-num">Slide 14</div><div class="sl-title">Kết Luận</div><div class="sl-body"><div class="sl-cta">DN chết vì ĐỨT DÒNG TIỀN – không phải lỗ</div></div></div>
+      </div>
+
+      <div class="ws-group-title reveal"><span class="wg-num" style="background:var(--secondary);">★</span>Quản Lý Tài Sản → Tạo Dòng Tiền (Slide 15–25)</div>
+      <div class="slide-grid">
+        <div class="slide-card2 reveal delay-1"><div class="sl-num">Slide 15</div><div class="sl-title">Góc Nhìn Mới</div><div class="sl-body">DN không thiếu tiền – mà đang <strong>chôn tiền trong tài sản</strong><div class="sl-cta">Hàng tồn kho · Công nợ · Tài sản chết</div></div></div>
+        <div class="slide-card2 reveal delay-2"><div class="sl-num">Slide 16</div><div class="sl-title">Tài Sản Là Gì?</div><div class="sl-body"><strong>Tài sản = thứ tạo ra tiền hoặc có khả năng tạo ra tiền</strong><br><span style="color:var(--on-surface-var);">Nhưng nhiều tài sản đang không tạo ra dòng tiền.</span></div></div>
+        <div class="slide-card2 reveal delay-3"><div class="sl-num">Slide 17</div><div class="sl-title">3 Loại Tài Sản</div><div class="sl-body"><ul><li><strong style="color:var(--secondary);">Sinh tiền:</strong> Hàng bán nhanh, máy hiệu quả</li><li><strong style="color:#e06a00;">Chậm tiền:</strong> Công nợ, hàng tồn kho lâu</li><li><strong style="color:var(--error);">Tài sản chết:</strong> Máy không dùng, hàng lỗi</li></ul></div></div>
+        <div class="slide-card2 reveal delay-4"><div class="sl-num">Slide 18</div><div class="sl-title">Vấn Đề Lớn Nhất</div><div class="sl-body">DN: tích sản nhưng không quản lý · có tài sản nhưng không có tiền<div class="sl-cta">→ Tài sản không quay vòng = dòng tiền bị nghẽn</div></div></div>
+        <div class="slide-card2 reveal delay-5"><div class="sl-num">Slide 19</div><div class="sl-title">Ví Dụ Thực Tế</div><div class="sl-body">Hàng tồn kho: 2 tỷ · Công nợ: 1 tỷ<br><strong>Tiền mặt: 50 triệu</strong><div class="sl-cta">→ DN vẫn "nghèo tiền"</div></div></div>
+        <div class="slide-card2 reveal"><div class="sl-num">Slide 20</div><div class="sl-title">Kết Luận Chuyển Ý</div><div class="sl-body">Muốn có dòng tiền tốt → <strong>Phải quản lý tài sản tốt</strong></div></div>
+        <div class="slide-card2 reveal delay-1"><div class="sl-num">Slide 21–23</div><div class="sl-title">4 Bước + Cách Làm Cụ Thể</div><div class="sl-body"><ul><li>Kiểm kê & phân loại tài sản</li><li>Giảm hàng tồn kho chậm</li><li>Thu hồi công nợ nhanh</li><li>Thanh lý tài sản chết</li></ul></div></div>
+        <div class="slide-card2 reveal delay-2"><div class="sl-num">Slide 24</div><div class="sl-title">Công Thức Cốt Lõi</div><div class="sl-body" style="text-align:center;"><div style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:6px;">Dòng tiền = Tốc độ quay của tài sản</div><em style="color:var(--on-surface-var);">Cash Flow ∝ Asset Turnover</em><div class="sl-cta">→ Quay càng nhanh → tiền càng nhiều</div></div></div>
+        <div class="slide-card2 reveal delay-3"><div class="sl-num">Slide 25</div><div class="sl-title">Thông Điệp Chốt</div><div class="sl-body">Không phải cứ có nhiều tài sản là giàu<div class="sl-cta">→ Tài sản phải tạo ra tiền</div></div></div>
+      </div>
+
+      <div class="ws-group-title reveal"><span class="wg-num">4–7</span>Giải Pháp · Giới Thiệu · Chốt Khách · Kết Thúc (Slide 26–30)</div>
+      <div class="slide-grid">
+        <div class="slide-card2 reveal delay-1"><div class="sl-num">Slide 26–27</div><div class="sl-title">3 Bước Giải Quyết</div><div class="sl-body"><ul><li>Kiểm soát dòng tiền hàng ngày</li><li>Tối ưu & cắt chi phí lãng phí</li><li>Cấu trúc lại tài chính (vay đúng)</li></ul></div></div>
+        <div class="slide-card2 reveal delay-2"><div class="sl-num">Slide 28</div><div class="sl-title">Hy Maxpro Là Ai?</div><div class="sl-body"><ul><li>Kế toán – thuế chuyên sâu</li><li>Tư vấn dòng tiền</li><li>Tư vấn vay vốn</li><li>Tái cấu trúc tài chính</li></ul></div></div>
+        <div class="slide-card2 reveal delay-3"><div class="sl-num">Slide 29</div><div class="sl-title">Ưu Đãi Hội Thảo</div><div class="sl-body"><ul><li>Tư vấn 1–1 miễn phí</li><li>Kiểm tra hồ sơ vay vốn</li><li>Nhận checklist quản lý tài chính</li></ul><div class="sl-cta">→ Đăng ký ngay hôm nay</div></div></div>
+        <div class="slide-card2 reveal delay-4"><div class="sl-num">Slide 30</div><div class="sl-title">Thông Điệp Kết</div><div class="sl-body" style="text-align:center;"><strong style="font-size:1rem;color:var(--primary);">Không phải kiếm tiền giỏi<br>→ Mà là GIỮ TIỀN GIỎI</strong></div></div>
+      </div>
+    </div>
+
+    <div class="ws-section" style="background:linear-gradient(135deg,#f0f4ff,#f5fff9);">
+      <div class="container">
+        <div class="quotes-block reveal">
+          <h3>🔥 Câu Nói Đỉnh – Dùng Trên Sân Khấu</h3>
+          <div class="quote-item2">"Doanh nghiệp chết không phải vì thiếu tài sản, mà vì tài sản không tạo ra tiền."</div>
+          <div class="quote-item2">"Tiền không mất đi, nó chỉ đang nằm sai chỗ."</div>
+          <div class="quote-item2">"Quản lý tài sản tốt = dòng tiền tự chảy về."</div>
+          <div class="quote-item2">"Quản lý tài sản tốt → Dòng tiền mạnh → Doanh nghiệp phát triển bền vững."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ws-section">
+      <div class="pr-sec-title reveal">
+        <div class="pt-icon pt-gold">🎯</div>
+        <h2><small>Lợi Ích</small>Khi Bổ Sung Phần Quản Lý Tài Sản</h2>
+      </div>
+      <div class="benefit-grid2">
+        <div class="benefit-card2 reveal delay-1"><div class="bi-icon">📈</div><p>Tăng độ <strong>uy tín chuyên sâu</strong> với khách hàng tiềm năng</p></div>
+        <div class="benefit-card2 reveal delay-2"><div class="bi-icon">💡</div><p>Khách thấy bạn <strong>khác hoàn toàn kế toán bình thường</strong></p></div>
+        <div class="benefit-card2 reveal delay-3"><div class="bi-icon">💰</div><p>Dễ bán gói <strong>tư vấn tái cấu trúc tài sản + dòng tiền</strong> (giá cao)</p></div>
+      </div>
+    </div>
+
+    <div class="ws-section" style="padding-bottom:var(--section-gap);">
+      <div class="pr-sec-title reveal">
+        <div class="pt-icon pt-green">🔄</div>
+        <h2><small>Quy Trình Triển Khai</small>5 Bước Làm Việc</h2>
+      </div>
+      <div class="process-row reveal">
+        <div class="ps-item"><div class="ps-box"><div class="ps-num">Bước 1</div><div class="ps-label">Khảo sát doanh nghiệp</div></div><div class="ps-arrow">›</div></div>
+        <div class="ps-item"><div class="ps-box"><div class="ps-num">Bước 2</div><div class="ps-label">Phân tích tài chính & tài sản</div></div><div class="ps-arrow">›</div></div>
+        <div class="ps-item"><div class="ps-box"><div class="ps-num">Bước 3</div><div class="ps-label">Đề xuất giải pháp</div></div><div class="ps-arrow">›</div></div>
+        <div class="ps-item"><div class="ps-box"><div class="ps-num">Bước 4</div><div class="ps-label">Triển khai thực tế</div></div><div class="ps-arrow">›</div></div>
+        <div class="ps-item"><div class="ps-box"><div class="ps-num">Bước 5</div><div class="ps-label">Theo dõi & tối ưu</div></div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- end tab-workshop -->
 
 <!-- ═══ FOOTER ════════════════════════════════ -->
 <footer>
